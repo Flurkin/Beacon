@@ -1,0 +1,32 @@
+{
+  "name": "authProject",
+  "version": "2.0.0",
+  "description": "A simple webserver with authentication built with Hapi, Hapi-auth-cookie, and Mongoose",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mark Moore",
+    "repository": {
+        "type": "git",
+        "url":"git+https://github.com/Flurkin/Beacon"
+    }
+  "dependencies": {
+    "handlebars": "^4.0.3",
+    "hapi": "^10.4.0",
+    "hapi-auth-cookie": "^3.1.0",
+    "joi": "^6.9.0",
+    "mongoose": "^4.1.10",
+    "passport-local-mongoose": "^3.1.0",
+    "vision": "^3.0.0",
+    "inert": "latest",
+    "dotenv": "^2.0.0"
+  },
+    "scripts": {
+        "start": "node index.js",
+        "start:dev":"nodemon index.js"
+    },
+    "devDependencies": {
+        "nodemon":"^1.9.1"
+    }
+}

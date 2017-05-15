@@ -1,0 +1,16 @@
+FROM node:argon
+
+# create app directory
+RUN mkdir -p /authProject/src
+WORKDIR /authProject/src
+
+# install app dependencies
+COPY package.json /authProject/src
+RUN npm install
+
+# copy app source code into working directory
+COPY . /authProject/src
+
+# expose the port for the app to run on
+EXPOSE 80
+CMD [ "npm", "start" ]
