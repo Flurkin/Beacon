@@ -42,6 +42,47 @@ exports.login = {
 };
 
 /**
+ * Responds to POST /login and logs the mobile user in, well, soon.
+ */
+exports.mobilelogin = {
+  handler: function (request, reply) {
+      var data = request.payload.options;
+      // To handle json
+      data = JSON.parse(data);
+    // In the version with Travelogue and Mongoose this was all handled by Passport (hence we retrieved
+    // Passport and inserted the request and reply variables).
+    User.authenticate()(data["user.email"], data["user.password"], function (err, user, passwordError) {
+
+      // There has been an error, do something with it. I just print it to console for demo purposes.
+      if (err) {
+        console.error(err);
+        return reply.redirect('/');
+      }
+
+      // Something went wrong with the login process, could be any of:
+      // https://github.com/saintedlama/passport-local-mongoose#error-messages
+      if (passwordError) {
+        // For now, just show the error and login form
+        console.log(passwordError);
+        return reply.view('/', {
+          errorMessage: passwordError.message,
+        });
+      }
+
+      // If the authentication failed user will be false. If it's not false, we store the user
+      // in our session and redirect the user to the hideout
+      if (user) {
+        request.auth.session.set(user);
+        return reply.redirect('/batmanshideout');
+      }
+
+      return reply.redirect('/');
+
+    });
+  }
+};
+
+/**
  * Responds to GET /logout and logs out the user
  */
 exports.logout = {
