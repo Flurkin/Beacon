@@ -46,7 +46,7 @@ exports.login = {
  */
 exports.mobilelogin = {
   handler: function (request, reply) {
-      var data = request.payload.options;
+      var data = request;
       // To handle json
       data = JSON.parse(data);
     // In the version with Travelogue and Mongoose this was all handled by Passport (hence we retrieved
