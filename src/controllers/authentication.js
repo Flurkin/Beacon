@@ -46,17 +46,22 @@ exports.login = {
  */
 exports.mobilelogin = {
   handler: function (request, reply) {
-      var data = request;
+      var data = request.payload;
       // To handle json
-      data = JSON.parse(data);
+      //console.log(json);
+      //var data = JSON.parse(json);
+      console.log(data);
+      console.log(data.username);
+      console.log(data.password);
     // In the version with Travelogue and Mongoose this was all handled by Passport (hence we retrieved
     // Passport and inserted the request and reply variables).
-    User.authenticate()(data["user.email"], data["user.password"], function (err, user, passwordError) {
+    User.authenticate()(data.username, data.password, function (err, user, passwordError) {
 
       // There has been an error, do something with it. I just print it to console for demo purposes.
       if (err) {
         console.error(err);
-        return reply.redirect('/');
+        data = JSON.stringify({ success: 0 });
+        return reply(data);
       }
 
       // Something went wrong with the login process, could be any of:
@@ -64,19 +69,20 @@ exports.mobilelogin = {
       if (passwordError) {
         // For now, just show the error and login form
         console.log(passwordError);
-        return reply.view('/', {
-          errorMessage: passwordError.message,
-        });
+        data = JSON.stringify({ success: 0 });
+        return reply(data);
       }
 
       // If the authentication failed user will be false. If it's not false, we store the user
       // in our session and redirect the user to the hideout
       if (user) {
         request.auth.session.set(user);
-        return reply.redirect('/batmanshideout');
+        data = JSON.stringify({ success: 1 });
+        return reply(data);
       }
 
-      return reply.redirect('/');
+        data = JSON.stringify({ success: 0 });
+      return reply(data);
 
     });
   }
