@@ -20,12 +20,40 @@ exports.index = {
 };
 
 /**
+ * Handles a call to / and shows some text with links to login and registration
+ */
+exports.report = {
+	auth: {
+		mode: 'try',
+		strategy: 'session'
+	},
+	handler: function (request, reply) {
+
+		return reply.view('IndividualReport');
+	}
+};
+
+/**
+ * Handles a call to / and shows some text with links to login and registration
+ */
+exports.reportlist = {
+	auth: {
+		mode: 'try',
+		strategy: 'session'
+	},
+	handler: function (request, reply) {
+
+		return reply.view('ViewReports');
+	}
+};
+
+/**
  * Handles a call to css
  */
 exports.public = {
 
     handler: function(request, reply) {
-        reply.file(Path.join(_dirname, '../views/' + request.params.resourceType + '/' + request.params.fileName))
+        reply.file(Path.join(__dirname, '../views/' + request.params.fileName))
     }
 };
 
