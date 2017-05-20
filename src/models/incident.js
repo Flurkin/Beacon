@@ -19,10 +19,13 @@ var incidentSchema = new Mongoose.Schema({
     ref: 'User',
     required: true
   },
-	incidentDate: {
-    type: Date,
+	latitude: {
+    type: Number,
     required: true,
-    default: Date.now
+  },
+	longitude: {
+    type: Number,
+    required: true,
   },
 	creationDate: {
     type: Date,
@@ -30,8 +33,6 @@ var incidentSchema = new Mongoose.Schema({
     default: Date.now
   }
 });
-
-
 
 //create the model and add it to the exports
 module.exports = Mongoose.model('Incident', incidentSchema, 'Incidents');

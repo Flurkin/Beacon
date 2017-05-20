@@ -1,6 +1,7 @@
 var Joi = require('joi');
 var User = require('../models/user');
 var Incident = require('../models/incident');
+var Image = require('../models/image');
 
 /**
  * Responds to POST /login and logs the user in, well, soon.
@@ -32,7 +33,7 @@ exports.login = {
       // in our session and redirect the user to the hideout
       if (user) {
         request.auth.session.set(user);
-        return reply.redirect('/batmanshideout');
+        return reply.redirect('/ViewReports');
       }
 
       return reply.redirect('/login');
@@ -83,6 +84,66 @@ exports.mobilelogin = {
 
         data = JSON.stringify({ success: 0 });
       return reply(data);
+
+    });
+  }
+};
+
+/**
+ * Responds to POST /login and logs the mobile user in, well, soon.
+ */
+exports.mobilereport = {
+  handler: function (request, reply) {
+      var data = request.payload;
+      // To handle json
+      //console.log(json);
+      //var data = JSON.parse(json);
+      console.log(data);
+    // In the version with Travelogue and Mongoose this was all handled by Passport (hence we retrieved
+    // Passport and inserted the request and reply variables).
+    User.authenticate()(data.username, data.password, function (err, user, passwordError) {
+
+      // There has been an error, do something with it. I just print it to console for demo purposes.
+      if (err) {
+        console.error(err);
+        data = JSON.stringify({ success: 0 });
+        return reply(data);
+      }
+
+      // Something went wrong with the login process, could be any of:
+      // https://github.com/saintedlama/passport-local-mongoose#error-messages
+      if (passwordError) {
+        // For now, just show the error and login form
+        console.log(passwordError);
+        data = JSON.stringify({ success: 1 });
+        return reply(data);
+      }
+
+      // If the authentication failed user will be false. If it's not false, we store the user
+      // in our session and redirect the user to the hideout
+      if (user) {
+        request.auth.session.set(user);
+      }
+
+        var newIncident = new Incident({
+            title: data.title,
+            description: data.description,
+            severity: data.severity,
+            user: user._id,
+            latitude: data.latitude,
+            longitude: data.longitude
+        });
+
+        console.log(user._id);
+        console.log(data.title);
+        console.log(data.description);
+        console.log(data.severity);
+        console.log(data.latitude);
+        console.log(data.longitude);
+
+        newIncident.save();
+        data = JSON.stringify({ success: 3 });
+        return reply(data);
 
     });
   }

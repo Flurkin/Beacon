@@ -1,9 +1,65 @@
-<h1> Login </h1>
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		<style>
+			@import url('https://fonts.googleapis.com/css?family=Khula');
 
-<p>{{errorMessage}}</p>
+			body {
+				margin-top: 150px;
+				border: none;
+			}
 
-<form method="post" action="login">
-	<p><input type="text"     name="email"    value="" placeholder="E-mail"></p>
-	<p><input type="password" name="password" value="" placeholder="Password"></p>
-	<p><input type="submit"   value="Login"></p>
-</form>
+			img {
+				height: 200px;
+				width: auto;
+			}
+
+			#email, #password {
+				margin: 5px;
+				height: 40px;
+				width: 300px;
+				background-color: #0e1d25;
+				border: 1px solid #00ffbf;
+				color: #ffffff;
+				border-radius: 20px;
+				text-align: center;
+				font-size: 15px;
+			}
+
+			#button {
+				margin-top: 20px;
+				height: 40px;
+				width: 300px;
+				background-color: #00ffbf;
+				border-radius: 20px;
+				border: none;
+				font-size: 15px;
+			}
+		</style>
+	</head>
+	<body>
+        <p>{{errorMessage}}</p>
+		<header>
+			<img src="gpsLogo4Crop.png" />
+			<h1>Beacon Login</h1>
+		</header>
+		<main>
+			<div id="login">
+				<form method="post" action="login">
+					<div><!-- Textbox: email -->
+						<input type="email" name="email" value="" placeholder="Email">
+					</div>
+					<div><!-- Textbox: password -->
+						<input type="password" name="password" value="" placeholder="Password">
+					</div>
+					<div>
+						<input type="submit" value="Login">
+					</div>
+				</form>
+			</div>
+		</main>
+	</body>
+</html>

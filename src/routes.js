@@ -18,4 +18,5 @@ exports.endpoints = [
 	{ method: 'GET',    path: '/logout',                       config: Authentication.logout },
 	{ method: 'POST',   path: '/register',                     config: Authentication.register },
 	{ method: 'POST',   path: '/mobilelogin',                  config: Authentication.mobilelogin },
+	{ method: 'POST',   path: '/mobilereport',                 config: Authentication.mobilereport },
 ];

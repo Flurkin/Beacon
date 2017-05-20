@@ -12,7 +12,7 @@ exports.index = {
 
 		if (request.auth.isAuthenticated) {
 			// The user is already logged in, redirect it to the hideout
-			return reply.redirect('/batmanshideout');
+			return reply.redirect('/ViewReports');
 		}
 
 		return reply.view('index');
@@ -23,13 +23,11 @@ exports.index = {
  * Handles a call to / and shows some text with links to login and registration
  */
 exports.report = {
-	auth: {
-		mode: 'try',
-		strategy: 'session'
-	},
+	auth: 'session',
 	handler: function (request, reply) {
-
-		return reply.view('IndividualReport');
+		return reply.view('IndividualReport', {
+			email: request.auth.credentials.email
+		});
 	}
 };
 
@@ -37,13 +35,11 @@ exports.report = {
  * Handles a call to / and shows some text with links to login and registration
  */
 exports.reportlist = {
-	auth: {
-		mode: 'try',
-		strategy: 'session'
-	},
+	auth: 'session',
 	handler: function (request, reply) {
-
-		return reply.view('ViewReports');
+		return reply.view('ViewReports', {
+			email: request.auth.credentials.email
+		});
 	}
 };
 
@@ -88,7 +84,7 @@ exports.register = {
 
 		if (request.auth.isAuthenticated) {
 			// The user is already logged in, redirect it to the hideout
-			return reply.redirect('/batmanshideout');
+			return reply.redirect('/ViewReports');
 		}
 
 		return reply.view('register');
