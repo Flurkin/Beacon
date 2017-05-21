@@ -12,9 +12,13 @@
         <p> Welcome to Beacon, {{email}}. Would you like to <a href="/logout">leave</a>? </p>
 		<h1>List of System Reports</h1>
 		<div id="list">
+            {{#each incidentList}}
 			<ul>
-                <li><a href="IndividualReport">List Item</a></li>
+                <li>| &nbsp; Title: {{title}} &nbsp; | &nbsp; Description: {{description}} &nbsp; |</li>
+                <li>| &nbsp; Severity: {{severity}} &nbsp; | &nbsp; Date: {{creationDate}} &nbsp; |</li>
+                <li><form method="post" action="IndividualReport"><input type="submit" value="View" style="width: 300px;font-size:13pt,padding:2px;background-color:#00ffbf;border:3px" /><input type="hidden" name="incidentId" value="{{_id}}"></form></li>
 			</ul>
+            {{/each}}
 		</div>
 	</body>
 </html>

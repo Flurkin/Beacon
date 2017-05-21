@@ -1,5 +1,6 @@
 var Path = require('path');
 var Hapi = require('hapi');
+var Incident = require('../models/incident');
 /**
  * Handles a call to / and shows some text with links to login and registration
  */
@@ -37,9 +38,17 @@ exports.report = {
 exports.reportlist = {
 	auth: 'session',
 	handler: function (request, reply) {
-		return reply.view('ViewReports', {
-			email: request.auth.credentials.email
-		});
+        Incident.find({})
+        .populate('_reporter')
+        .exec(function (err, incidents){
+            if(!err)
+                {
+                    return reply.view('ViewReports', {
+                            email: request.auth.credentials.email,
+                            incidentList: incidents
+                    });
+                }
+        })
 	}
 };
 
@@ -88,6 +97,22 @@ exports.register = {
 		}
 
 		return reply.view('register');
+	}
+};
+
+/**
+ * Handles a call to /register and shows a registration form
+ */
+exports.mobilereport = {
+	auth: {
+		mode: 'try',
+		strategy: 'session'
+	},
+	handler: function (request, reply) {
+
+
+
+		return reply.view('mobilereport');
 	}
 };
 

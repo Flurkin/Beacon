@@ -10,6 +10,7 @@ exports.endpoints = [
 	{ method: 'GET',    path: '/',                             config: Pages.index    },
 	{ method: 'GET',    path: '/login',                        config: Pages.login    },
 	{ method: 'GET',    path: '/register',                     config: Pages.register },
+	{ method: 'GET',    path: '/mobilereport',                     config: Pages.mobilereport },
 	{ method: 'GET',    path: '/batmanshideout',               config: Pages.secret   },
 	{ method: 'GET',    path: '/IndividualReport',             config: Pages.report },
 	{ method: 'GET',    path: '/ViewReports',                  config: Pages.reportlist   },
@@ -19,4 +20,5 @@ exports.endpoints = [
 	{ method: 'POST',   path: '/register',                     config: Authentication.register },
 	{ method: 'POST',   path: '/mobilelogin',                  config: Authentication.mobilelogin },
 	{ method: 'POST',   path: '/mobilereport',                 config: Authentication.mobilereport },
+	{ method: 'POST',   path: '/IndividualReport',             config: Authentication.report },
 ];

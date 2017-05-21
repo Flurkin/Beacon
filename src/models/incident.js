@@ -16,8 +16,7 @@ var incidentSchema = new Mongoose.Schema({
   },
 	reporter: {
     type: Mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
+    ref: 'User'
   },
 	latitude: {
     type: Number,

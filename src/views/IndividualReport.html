@@ -15,39 +15,49 @@
 	</head>
 	<body>
 		<header>
-			<h1>Default Report</h1>
+            {{#each incidentList}}
+			<h1>Title: {{title}}</h1>
+            {{/each}}
 			<div id="images">
-				<img src="" />
-				<img src="" />
-				<img src="" />
+                {{#each imageList}}
+				<img src="{{name}}.png" />
+                {{/each}}
 			</div>
+            {{#each incidentList}}
 			<!-- details of person submitting report -->
 			<hr>
 			<address>
-				"date submitted" <br />
-				"name" <br />
-				"email" <br />
+				Date Submitted: {{creationDate}} <br />
+                {{/each}}
+                {{#each userList}}
+				Reporter: {{email}} <br />
+                {{/each}}
 			</address>
 			<hr>
 		</header>
 		<main>
+            {{#each incidentList}}
 			<div id="reportContent">
 				<h2>Severity</h2>
-					<p>"severity status"</p>
+					<p>{{severity}}</p>
 				<h2>Description</h2>
-					<p>"description content"</p>
+					<p>D{{description}}</p>
 			</div>
+            <input type="hidden" name="latitude" value="{{latitude}}" />
+            <input type="hidden" name="longitude" value="{{longitude}}" />
 			<div id="container">
 				<div id="map"></div>
 				<script>
 			      function initMap() {
-			        var uluru = {lat: -25.363, lng: 131.044};
+                      var lata = {{latitude}};
+                    var long = {{longitude}};
+			        var incident = {lat: lata, lng: long};
 			        var map = new google.maps.Map(document.getElementById('map'), {
-			          zoom: 4,
-			          center: uluru
+			          zoom: 6,
+			          center: incident
 			        });
 			        var marker = new google.maps.Marker({
-			          position: uluru,
+			          position: incident,
 			          map: map
 			        });
 			      }
@@ -60,4 +70,5 @@
             <p> <a href="ViewReports">Return To Report List</a> </p>
 		<footer></footer>
 	</body>
+    {{/each}}
 </html>
