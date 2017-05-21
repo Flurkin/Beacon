@@ -1,3 +1,4 @@
+// Code belongs and has been adapted from https://github.com/do-community/hapi-example and https://github.com/Kevin-A/AuthProject
 var Pages = require('./controllers/pages');
 var Authentication = require('./controllers/authentication');
 

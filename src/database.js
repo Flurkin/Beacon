@@ -1,3 +1,4 @@
+// Code belongs and has been adapted from https://github.com/do-community/hapi-example and https://github.com/Kevin-A/AuthProject
 var Mongoose = require('mongoose');
 var Config = require('./config');
 

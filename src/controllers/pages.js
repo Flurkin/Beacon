@@ -1,3 +1,4 @@
+// Code belongs and has been adapted from https://github.com/do-community/hapi-example and https://github.com/Kevin-A/AuthProject
 var Path = require('path');
 var Hapi = require('hapi');
 var Incident = require('../models/incident');
